@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "apple";
+  src: url("../assets/apple.ttf");
+}
+
+@layer components {
+  .fade{
+    @apply cursor-pointer transition-all ease-in-out;
+  }
+  .btnPrimarySmall{
+    @apply fade px-3 py-2 bg-primary rounded-md text-white
+    hover:bg-blue-500
+  }
+  .btnPrimaryLarge{
+    @apply fade px-5 py-3 bg-primary rounded-md text-white
+    hover:bg-blue-500
+  }
+  .inputField{
+    @apply border-gray-300 border-2 px-5 py-2 rounded-lg w-72 
+    outline-none focus:border-primary duration-200
+  }
+}
