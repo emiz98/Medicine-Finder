@@ -1,4 +1,4 @@
-package com.medfinder.medfinder.model;
+package com.medfinder.medfinder.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
