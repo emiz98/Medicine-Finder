@@ -7,6 +7,10 @@
   src: url("../assets/apple.ttf");
 }
 
+.leaflet-control-attribution{
+  visibility: hidden !important;
+}
+
 @layer components {
   .fade{
     @apply cursor-pointer transition-all ease-in-out;

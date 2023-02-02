@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { AuthContextProvider } from "../context/authContext";
-import ProtectedRoute from "../protected_routes";
+import { AuthContextProvider } from "../../context/authContext";
+import ProtectedRoute from "../../protected_routes";
 
-const Layout = () => {
+const AuthLayout = () => {
   return (
     <AuthContextProvider>
       <ProtectedRoute>
@@ -13,4 +13,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default AuthLayout;

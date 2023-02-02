@@ -28,10 +28,11 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const signup = async (email, password) => {
+  const signup = async (email, password,role) => {
     const req = await request.post("/auth/register", {
       email: email,
       password: password,
+      role:role
     });
     setUser(req.data);
     localStorage.setItem("token", req.data.token);

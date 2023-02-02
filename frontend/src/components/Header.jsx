@@ -4,7 +4,7 @@ import { useAuth } from "../context/authContext";
 
 const Header = ({ setLoginModal }) => {
   const { user, logout } = useAuth();
-  console.log(user);
+  
   return (
     <div
       className="sticky px-10 md:px-40 py-5 bg-white shadow-md flex 
@@ -26,7 +26,7 @@ const Header = ({ setLoginModal }) => {
           />
           <div className="flex flex-col items-start">
             <h6 className="text-xs">Logged in as</h6>
-            <h4 className="font-medium text-lg">{user?.email.split("@")[0]}</h4>
+            <h4 className="font-medium text-xl -mt-1">{user?.email?.split("@")[0]}</h4>
           </div>
           <button onClick={() => logout()} className="text-sm btnPrimarySmall">
             Logout

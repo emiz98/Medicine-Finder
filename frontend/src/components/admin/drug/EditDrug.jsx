@@ -4,7 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useForm } from "react-hook-form";
 import request from "../../../../axios";
 
-const AddDrug = ({ setAddModal }) => {
+const EditDrug = ({ id, brand, description, name, strength, refetch, setModal }) => {
   const {
     register,
     handleSubmit,
@@ -13,14 +13,18 @@ const AddDrug = ({ setAddModal }) => {
 
   const submitForm = async (data) => {
     await request
-      .post("/drug/create", {
-        name: "ff",
-        brand: "fff",
-        description: "ffff",
-        strength: "asdasd",
+      .post("/drug/update", {
+        id: id,
+        name: data.name,
+        brand: data.brand,
+        description: data.description,
+        strength: data.strength,
       })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        refetch()
+        setModal(false)
+      })
+      .catch((err) => setModal(false));
   };
 
   return (
@@ -41,7 +45,7 @@ const AddDrug = ({ setAddModal }) => {
     >
       <div
         className="h-screen w-screen absolute"
-        onClick={() => setAddModal(false)}
+        onClick={() => setModal(false)}
       />
       <motion.div
         initial={{ scale: 0 }}
@@ -58,9 +62,9 @@ const AddDrug = ({ setAddModal }) => {
             shadow-md border border-primary"
       >
         <div className="flex items-center justify-between gap-x-5">
-          <span className="text-xl font-medium">Add drug</span>
+          <span className="text-xl font-medium">Edit {name}</span>
           <XMarkIcon
-            onClick={() => setAddModal(false)}
+            onClick={() => setModal(false)}
             className="w-10 object-contain cursor-pointer 
                 rounded-full p-1 text-3xl border-2 border-primary text-primary
                 hover:text-white hover:bg-primary fade"
@@ -71,30 +75,30 @@ const AddDrug = ({ setAddModal }) => {
           onSubmit={handleSubmit(submitForm)}
         >
           <input
-            {...register("name", { required: true })}
+            {...register("name", { required: true, value: name })}
             className={`inputField`}
             type="text"
             placeholder="Enter name"
           />
           <input
-            {...register("brand", { required: true })}
+            {...register("brand", { required: true, value: brand })}
             className={`inputField`}
             type="text"
             placeholder="Enter brand"
           />
           <textarea
-            {...register("description", { required: true })}
+            {...register("description", { required: true, value: description })}
             className={`inputField`}
             placeholder="Enter description"
           />
           <input
-            {...register("strength", { required: true })}
+            {...register("strength", { required: true, value: strength })}
             className={`inputField`}
             type="text"
             placeholder="Enter strength"
           />
           <button type="submit" className="btnPrimaryLarge w-full mt-5">
-            Add drug
+            Edit drug
           </button>
         </form>
       </motion.div>
@@ -102,4 +106,4 @@ const AddDrug = ({ setAddModal }) => {
   );
 };
 
-export default AddDrug;
+export default EditDrug;

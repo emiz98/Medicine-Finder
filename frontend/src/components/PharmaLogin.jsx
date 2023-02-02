@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
 import Map from './pharma/Map'
 import { useGeolocated } from "react-geolocated";
 
 const PharmaLogin = ({ setLoginModal }) => {
-    const [isSignUp, setIsSignUp] = useState(false)
     const { coords, isGeolocationAvailable, isGeolocationEnabled } =
         useGeolocated({
             positionOptions: {
@@ -47,7 +46,7 @@ const PharmaLogin = ({ setLoginModal }) => {
                 shadow-md border border-primary"
             >
                 <div className="flex items-center justify-between gap-x-5">
-                    <span className='text-xl font-medium'>{!isSignUp ? "Login as pharmacy" : "Get started"}</span>
+                    <span className='text-xl font-medium'>Get started</span>
                     <XMarkIcon
                         onClick={() => setLoginModal(false)}
                         className="w-10 object-contain cursor-pointer 
@@ -55,30 +54,12 @@ const PharmaLogin = ({ setLoginModal }) => {
                     hover:text-white hover:bg-primary fade"
                     />
                 </div>
-                <div className='flex flex-col items-start gap-y-2 mt-10 mb-5'>
-                    <input required className='inputField' type="text" placeholder='Enter email' />
-                    <input required className='inputField' type="password" placeholder='Enter password' />
-                    {isSignUp && 
-                    <>
-                        <input required className='inputField' type="text" placeholder='Pharmacy name' />
-                        <Map center={[coords.latitude,coords.longitude]}/>
-                    </>
-                    }
+                <div className='flex flex-col items-start gap-y-2 mt-8 mb-5'>
+                <input required className='inputField' type="text" placeholder='Pharmacy name' />
+                    <input required className='inputField' type="text" placeholder='Enter address' />
+                    {coords&&<Map center={[coords.latitude, coords.longitude]} />}
                 </div>
-                <button className='btnPrimaryLarge w-full'>{!isSignUp ? "Login" : "Get started"}</button>
-                {!isSignUp ?
-                    <div className='flex items-center gap-x-2 mt-2 justify-center text-sm'>
-                        <span>Don't have an account</span>
-                        <span onClick={() => setIsSignUp(true)} className='font-medium hover:underline text-primary
-                        cursor-pointer'>Sign up</span>
-                    </div>
-                    :
-                    <div className='flex items-center gap-x-2 mt-2 justify-center text-sm'>
-                        <span>Already have an account</span>
-                        <span onClick={() => setIsSignUp(false)} className='font-medium hover:underline text-primary
-                        cursor-pointer'>Log in</span>
-                    </div>
-                }
+                <button className='btnPrimaryLarge w-full'>Get started</button>
             </motion.div>
         </motion.div>
     )

@@ -8,8 +8,7 @@ request.interceptors.request.use(
   (request) => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log("token");
-      request.headers.Authorization = token;
+      request.headers.Authorization = `Bearer ${token}`;
     }
 
     return request;

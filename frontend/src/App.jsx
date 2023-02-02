@@ -5,11 +5,14 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import PharmacyLogin from "./components/PharmaLogin";
 import Login from "./components/Login";
+import { useAuth } from "./context/authContext";
+import { Link } from "react-router-dom";
 
 const App = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
-
+  const { user } = useAuth();
+  
   return (
     <div className="">
       <Header setLoginModal={setSignUpModal} />
@@ -47,10 +50,13 @@ const App = () => {
                 Notify drugs availability.
               </span>
             </div>
+            <Link to="/search">
+              <button className="btnPrimaryLarge w-1/2 mt-8">Browse for drugs</button>
+            </Link>
           </div>
         </div>
       </main>
-      <Footer setLoginModal={setLoginModal} />
+      {user && <Footer setLoginModal={setLoginModal} />}
 
       <AnimatePresence>
         {loginModal && <PharmacyLogin setLoginModal={setLoginModal} />}

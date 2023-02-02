@@ -1,5 +1,5 @@
 import React, {useMemo, useRef, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Tooltip, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import SearchField from './SearchField'
@@ -14,6 +14,7 @@ const icon = L.icon({
 })
 
 const Map = ({center}) => {
+    console.log(center);
     const markerRef = useRef(null)
     const eventHandlers = useMemo(
         () => ({
@@ -27,9 +28,22 @@ const Map = ({center}) => {
         [],
     )
 
+    function Markers() {
+        const map = useMap()
+        return (
+              <Marker
+                key={center}
+                position={center}
+                icon={icon}
+              >
+              </Marker>
+        )
+      }
+
     return (
         <div className='w-full border-2 border-primary rounded-lg select-none'>
             <MapContainer
+                key={center}
                 center={center}
                 zoom={15}
                 scrollWheelZoom={true}
@@ -40,6 +54,7 @@ const Map = ({center}) => {
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <Markers />
             </MapContainer>
         </div>
     )

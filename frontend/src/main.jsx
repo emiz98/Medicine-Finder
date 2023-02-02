@@ -5,13 +5,32 @@ import Search from "./pages/user/Search";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Results from "./pages/user/Results.jsx";
-import Dashboard from "./pages/pharma/Dashboard.jsx";
-import Layout from "./components/Layout.jsx";
+import DashboardAdmin from "./pages/admin/Dashboard";
+import DashboardPharmacy from "./pages/pharma/Dashboard";
+import AuthLayout from "./components/layout/AuthLayout.jsx";
+import UserLayout from "./components/layout/UserLayout.jsx";
+import ErrorPage from './components/ErrorPage'
+import AdminLayout from "./components/layout/AdminLayout.jsx";
+import PharmacyLayout from "./components/layout/PharmacyLayout.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <AuthLayout />,
+    children: [
+      {
+        index: true,
+        element: <App />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage/>,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <UserLayout />,
     children: [
       {
         index: true,
@@ -26,12 +45,36 @@ const router = createBrowserRouter([
         element: <Results />,
       },
       {
-        path: "dashboard",
-        element: <Dashboard />,
+        path: "*",
+        element: <ErrorPage/>,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        index:true,
+        element: <DashboardAdmin />,
       },
       {
         path: "*",
-        element: <div>Not found</div>,
+        element: <ErrorPage/>,
+      },
+    ],
+  },
+  {
+    path: "/pharmacy",
+    element: <PharmacyLayout />,
+    children: [
+      {
+        index:true,
+        element: <DashboardPharmacy />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage/>,
       },
     ],
   },

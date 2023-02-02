@@ -16,7 +16,7 @@ const Login = ({ setLoginModal }) => {
   const submitForm = (data) => {
     data.email = data.email.toLowerCase();
     if (isSignUp) {
-      signup(data.email, data.password);
+      signup(data.email, data.password,"USER");
       setLoginModal(false);
     } else {
       login(data.email, data.password);

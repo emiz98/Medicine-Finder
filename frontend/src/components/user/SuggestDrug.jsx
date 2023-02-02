@@ -6,9 +6,10 @@ const SuggestDrug = () => {
     <Link to="/search/drug">
       <div
         className="px-8 py-4 bg-white shadow-md rounded-lg flex hover:bg-gray-100
-    items-center gap-x-5 mb-4 cursor-pointer fade border-2 hover:border-primary"
+    items-center gap-x-5 mb-4 cursor-pointer fade border-2
+    border-gray-200 hover:border-primary"
       >
-        <div className="w-28 h-28 bg-primary rounded-lg relative">
+        <div className="hidden md:inline-flex w-28 h-28 bg-primary rounded-lg relative">
           <img
             className="absolute -top-3 h-full object-contain"
             src="/assets/med.png"

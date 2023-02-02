@@ -30,7 +30,7 @@ const Results = () => {
                         <span className='bg-green-500 rounded-lg text-sm px-2 py-1 text-white mt-2'>In stock</span>
                     </div>
                 </div>
-                <div className='h-[65vh] overflow-y-scroll scrollbar-hide space-y-2'>
+                <div className='h-[42vh] md:h-[65vh] overflow-y-scroll scrollbar-hide space-y-2'>
                     <Pharma/>
                     <Pharma/>
                     <Pharma/>

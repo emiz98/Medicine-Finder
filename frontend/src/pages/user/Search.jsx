@@ -22,7 +22,7 @@ const search = () => {
             />
           </Link>
         </div>
-        <div className="w-full h-16 mt-20 bg-gradient-to-b from-gray-200 to-transparent absolute top-0 z-10" />
+        <div className="w-full h-8 mt-20 bg-gradient-to-b from-gray-200 to-transparent absolute top-0 z-10" />
         <div className="mt-10 h-[62vh] overflow-y-scroll scrollbar-hide py-4">
           <SuggestDrug />
           <SuggestDrug />
@@ -32,7 +32,7 @@ const search = () => {
           <SuggestDrug />
           <SuggestDrug />
         </div>
-        <div className="w-full h-16 mt-20 bg-gradient-to-b from-transparent to-gray-200 absolute bottom-0 z-10" />
+        <div className="w-full h-8 mt-20 bg-gradient-to-b from-transparent to-gray-200 absolute bottom-0 z-10" />
       </main>
     </div>
   );

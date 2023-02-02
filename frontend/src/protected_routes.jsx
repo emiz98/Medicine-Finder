@@ -6,15 +6,18 @@ const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  console.log(user);
-
   useEffect(() => {
-    if (!user) {
-      navigate("/");
+    if (user?.role=="PHARMA") {
+      navigate("/pharmacy");
+    }else if(user?.role=="ADMIN"){
+      navigate("/admin")
+    }else if(user?.role=="USER"){
+    }else{
+      navigate("/")
     }
   }, [user]);
 
-  return user ? children : children;
+  return children
 };
 
-export default ProtectedRoute;
+export default ProtectedRoute

@@ -25,10 +25,6 @@ public class DrugService {
         return drugRepository.save(drug);
     }
     public Drug updateDrug(Drug drug){
-        Drug existingDrug = drugRepository.findById(drug.getId()).get();
-        existingDrug.setName(drug.getName());
-        existingDrug.setBrand(drug.getBrand());
-        existingDrug.setDescription(drug.getDescription());
         return drugRepository.save(drug);
     }
     public void deleteDrug(Long id){
