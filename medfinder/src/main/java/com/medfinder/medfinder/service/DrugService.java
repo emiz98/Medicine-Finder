@@ -1,6 +1,6 @@
 package com.medfinder.medfinder.service;
 
-import com.medfinder.medfinder.model.Drug;
+import com.medfinder.medfinder.entity.Drug;
 import com.medfinder.medfinder.repository.DrugRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.medfinder.medfinder.controller;
 
-import com.medfinder.medfinder.model.AgencyDrugs;
+import com.medfinder.medfinder.entity.AgencyDrug;
 import com.medfinder.medfinder.repository.AgencyDrugRepository;
 import com.medfinder.medfinder.service.AgencyDrugService;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +19,23 @@ public class AgencyDrugController {
         this.agencyDrugRepository = agencyDrugRepository;
     }
 
-    @GetMapping("drugs/{agencyID}")
-    public List<AgencyDrugs> z(@PathVariable Long agencyID){
+    @GetMapping("/agency/drugs/{agencyID}")
+    public List<AgencyDrug> z(@PathVariable Long agencyID){
         return agencyDrugService.getDrugsByAgency(agencyID);
     }
 
-    @PostMapping("drugs/create")
-    public AgencyDrugs createAgencyDrug(@RequestBody AgencyDrugs agencyDrugs){
-        System.out.println(agencyDrugs);
+    @PostMapping("/agency/drug")
+    public AgencyDrug createAgencyDrug(@RequestBody AgencyDrug agencyDrugs){
         return agencyDrugService.createAgencyDrug(agencyDrugs);
+    }
+
+    @PutMapping("/agency/drug")
+    public AgencyDrug updateAgencyDrug(@RequestBody AgencyDrug agencyDrug){
+        return agencyDrugService.updateAgencyDrug(agencyDrug);
+    }
+
+    @DeleteMapping("/agency/drug/{id}")
+    public void deleteAgencyById(@PathVariable Long id){
+        agencyDrugService.deleteAgencyDrugById(id);
     }
 }

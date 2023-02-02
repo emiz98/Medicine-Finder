@@ -1,8 +1,9 @@
 package com.medfinder.medfinder.service;
 
 import com.medfinder.medfinder.dto.ResponseHandler;
-import com.medfinder.medfinder.model.Agency;
-import com.medfinder.medfinder.model.User;
+import com.medfinder.medfinder.entity.Agency;
+import com.medfinder.medfinder.entity.Role;
+import com.medfinder.medfinder.entity.User;
 import com.medfinder.medfinder.repository.AgencyRepository;
 import com.medfinder.medfinder.repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -23,15 +24,17 @@ public class AgencyService {
         this.userRepository = userRepository;
     }
 
-    public List<Agency> getAllAgencies(){
+    public List<Agency> getAllAgencies() {
         return agencyRepository.findAll();
     }
+
     public Agency getAgencyById(Long id) {
         return agencyRepository.findById(id).get();
     }
-    public ResponseEntity<Object> createAgency(Agency agency, String email){
+
+    public ResponseEntity<Object> createAgency(Agency agency, String email) {
         Optional<Agency> existingAgency = agencyRepository.findAgencyByName(agency.getName());
-        if(!existingAgency.isPresent()){
+        if (!existingAgency.isPresent()) {
             User user = userRepository.findByEmail(email)
                     .orElseThrow();
             Agency agencyObj = Agency.builder()
@@ -41,24 +44,27 @@ public class AgencyService {
                     .lon(agency.getLon())
                     .build();
             agencyRepository.save(agencyObj);
+
+            user.setRole(Role.PHARMA);
+            userRepository.save(user);
             return ResponseHandler.generateResponse(
                     "Agency added successfully.",
                     HttpStatus.OK,
-                    null);
-        }else{
+                    null, null);
+        } else {
             return ResponseHandler.generateResponse(
                     "Agency already exists.",
                     HttpStatus.CONFLICT,
-                    null);
+                    null, null);
         }
 
     }
-    public Agency updateAgency(Agency agency){
 
-
+    public Agency updateAgency(Agency agency) {
         return agencyRepository.save(agency);
     }
-    public void deleteAgencyById(Long id){
+
+    public void deleteAgencyById(Long id) {
         agencyRepository.deleteById(id);
     }
 }

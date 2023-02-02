@@ -4,15 +4,13 @@ import { AnimatePresence } from "framer-motion";
 import AddDrug from "../../components/admin/drug/AddDrug";
 import { useQuery } from "react-query";
 import request from "../../../axios";
-import DashboardDrug from '../../components/admin/drug/DashboardDrug'
+import DashboardDrug from "../../components/admin/drug/DashboardDrug";
 
 const Dashboard = () => {
   const [addModal, setAddModal] = useState(false);
-  const { isLoading, error, data, refetch } = useQuery('repoDrugs', () =>
-    request.get('/drug/all').then(res => res.data)
-  )
-
-  if (isLoading) console.log("loading");
+  const { isLoading, error, data, refetch } = useQuery("repoDrugs", () =>
+    request.get("/drugs").then((res) => res.data)
+  );
 
   return (
     <div className="bg-gray-200 h-screen overflow-hiddens">
@@ -29,7 +27,7 @@ const Dashboard = () => {
             </button>
           </div>
           <div className="mt-5 flex flex-col items-start gap-y-2">
-            {data?.map(({ id, brand, description, name, strength }) =>
+            {data?.map(({ id, brand, description, name, strength }) => (
               <DashboardDrug
                 key={id}
                 id={id}
@@ -38,14 +36,13 @@ const Dashboard = () => {
                 name={name}
                 strength={strength}
                 refetch={refetch}
-              />)}
+              />
+            ))}
           </div>
         </div>
       </main>
       <AnimatePresence>
-        {addModal &&
-          <AddDrug setAddModal={setAddModal} refetch={refetch}
-        />}
+        {addModal && <AddDrug setAddModal={setAddModal} refetch={refetch} />}
       </AnimatePresence>
     </div>
   );

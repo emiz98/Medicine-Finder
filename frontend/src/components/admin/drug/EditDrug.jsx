@@ -4,7 +4,15 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useForm } from "react-hook-form";
 import request from "../../../../axios";
 
-const EditDrug = ({ id, brand, description, name, strength, refetch, setModal }) => {
+const EditDrug = ({
+  id,
+  brand,
+  description,
+  name,
+  strength,
+  refetch,
+  setModal,
+}) => {
   const {
     register,
     handleSubmit,
@@ -13,7 +21,7 @@ const EditDrug = ({ id, brand, description, name, strength, refetch, setModal })
 
   const submitForm = async (data) => {
     await request
-      .post("/drug/update", {
+      .put("/drug", {
         id: id,
         name: data.name,
         brand: data.brand,
@@ -21,8 +29,8 @@ const EditDrug = ({ id, brand, description, name, strength, refetch, setModal })
         strength: data.strength,
       })
       .then((res) => {
-        refetch()
-        setModal(false)
+        refetch();
+        setModal(false);
       })
       .catch((err) => setModal(false));
   };

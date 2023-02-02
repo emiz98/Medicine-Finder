@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import request from "../../axios";
+import { NotifyError, NotifySuccess } from "../components/Notify";
 
 const AuthContext = createContext({});
 
@@ -21,31 +22,47 @@ export const AuthContextProvider = ({ children }) => {
           token: _token,
         })
         .then((res) => setUser(res.data))
-        .then(() => setLoading(false))
-        .catch((err) => setLoading(false));
+        .then(() => {
+          setLoading(false);
+          NotifySuccess("Token validated.");
+        })
+        .catch((err) => {
+          setLoading(false);
+          NotifyError("Token expired. Please sign in again.");
+          localStorage.removeItem("token");
+        });
     } else {
       setLoading(false);
     }
   };
 
-  const signup = async (email, password,role) => {
-    const req = await request.post("/auth/register", {
-      email: email,
-      password: password,
-      role:role
-    });
-    setUser(req.data);
-    localStorage.setItem("token", req.data.token);
+  const signup = async (email, password, role) => {
+    await request
+      .post("/auth/register", {
+        email: email,
+        password: password,
+        role: role,
+      })
+      .then((res) => {
+        NotifySuccess(`Welcome to healthX. Please login again.`);
+      })
+      .catch((err) => NotifyError("Oops! something went wrong."));
     setLoading(false);
   };
 
   const login = async (email, password) => {
-    const req = await request.post("/auth/authenticate", {
-      email: email,
-      password: password,
-    });
-    setUser(req.data);
-    localStorage.setItem("token", req.data.token);
+    await request
+      .post("/auth/authenticate", {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        setUser(res.data);
+        localStorage.setItem("token", res.data.token);
+        NotifySuccess("Successfully logged in.");
+      })
+      .catch((err) => NotifyError("Username or password is incorrect."));
+
     setLoading(false);
   };
 

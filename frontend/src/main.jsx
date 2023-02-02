@@ -9,7 +9,7 @@ import DashboardAdmin from "./pages/admin/Dashboard";
 import DashboardPharmacy from "./pages/pharma/Dashboard";
 import AuthLayout from "./components/layout/AuthLayout.jsx";
 import UserLayout from "./components/layout/UserLayout.jsx";
-import ErrorPage from './components/ErrorPage'
+import ErrorPage from "./components/ErrorPage";
 import AdminLayout from "./components/layout/AdminLayout.jsx";
 import PharmacyLayout from "./components/layout/PharmacyLayout.jsx";
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <ErrorPage/>,
+        element: <ErrorPage />,
       },
     ],
   },
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <ErrorPage/>,
+        element: <ErrorPage />,
       },
     ],
   },
@@ -55,12 +55,12 @@ const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-        index:true,
+        index: true,
         element: <DashboardAdmin />,
       },
       {
         path: "*",
-        element: <ErrorPage/>,
+        element: <ErrorPage />,
       },
     ],
   },
@@ -69,12 +69,12 @@ const router = createBrowserRouter([
     element: <PharmacyLayout />,
     children: [
       {
-        index:true,
+        index: true,
         element: <DashboardPharmacy />,
       },
       {
         path: "*",
-        element: <ErrorPage/>,
+        element: <ErrorPage />,
       },
     ],
   },

@@ -1,10 +1,7 @@
 package com.medfinder.medfinder.service;
 
-import com.medfinder.medfinder.model.Agency;
-import com.medfinder.medfinder.model.AgencyDrugs;
-import com.medfinder.medfinder.model.Drug;
+import com.medfinder.medfinder.entity.AgencyDrug;
 import com.medfinder.medfinder.repository.AgencyDrugRepository;
-import com.medfinder.medfinder.repository.AgencyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +14,26 @@ public class AgencyDrugService {
 
     private final AgencyDrugRepository agencyDrugRepository;
 
-    public List<AgencyDrugs> getDrugsByAgency(Long agencyId){
+    public List<AgencyDrug> getDrugsByAgency(Long agencyId){
 
         return  agencyDrugRepository.findByAgency_Id(agencyId);
     }
 
-    public AgencyDrugs createAgencyDrug(AgencyDrugs agencyDrugs){
-        Optional<AgencyDrugs> existingAgencyDrug = agencyDrugRepository.findByDrug_Id(agencyDrugs.getDrug().getId());
+    public AgencyDrug createAgencyDrug(AgencyDrug agencyDrugs){
+        Optional<AgencyDrug> existingAgencyDrug = agencyDrugRepository.findByDrug_Id(agencyDrugs.getDrug().getId());
         if(!existingAgencyDrug.isPresent()){
             return agencyDrugRepository.save(agencyDrugs);
         }else{
             return null;
         }
 
+    }
+
+    public AgencyDrug updateAgencyDrug(AgencyDrug agencyDrug) {
+        return agencyDrugRepository.save(agencyDrug);
+    }
+
+    public void deleteAgencyDrugById(Long id) {
+        agencyDrugRepository.deleteById(id);
     }
 }

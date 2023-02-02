@@ -2,8 +2,13 @@ import Header from "../../components/Header";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import SuggestDrug from "../../components/user/SuggestDrug";
 import { Link } from "react-router-dom";
+import Footer from "../../components/user/Footer";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import PharmacyLogin from "../../components/PharmaLogin";
 
 const search = () => {
+  const [loginModal, setLoginModal] = useState(false);
   return (
     <div className="bg-gray-200 h-screen overflow-hidden">
       <Header />
@@ -34,6 +39,10 @@ const search = () => {
         </div>
         <div className="w-full h-8 mt-20 bg-gradient-to-b from-transparent to-gray-200 absolute bottom-0 z-10" />
       </main>
+      <Footer setLoginModal={setLoginModal} />
+      <AnimatePresence>
+        {loginModal && <PharmacyLogin setLoginModal={setLoginModal} />}
+      </AnimatePresence>
     </div>
   );
 };

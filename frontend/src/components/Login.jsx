@@ -16,30 +16,13 @@ const Login = ({ setLoginModal }) => {
   const submitForm = (data) => {
     data.email = data.email.toLowerCase();
     if (isSignUp) {
-      signup(data.email, data.password,"USER");
+      signup(data.email, data.password, "USER");
       setLoginModal(false);
     } else {
       login(data.email, data.password);
       setLoginModal(false);
     }
   };
-
-  // const handleSignup = async () => {
-  //     await request.post('/auth/register', {
-  //         email: data.email,
-  //         password: data.password,
-  //         role: "USER"
-  //     }
-  //     ).then(res => console.log(res.data.token)).catch(err => console.log(err))
-  // }
-  // const handleSignin = async () => {
-  //     await request.post('/auth/authenticate', {
-  //         email: data.email,
-  //         password: data.password,
-  //         role: "USER"
-  //     }
-  //     ).then(res => localStorage.setItem('token', res.data.token)).catch(err => console.log(err))
-  // }
 
   return (
     <motion.div

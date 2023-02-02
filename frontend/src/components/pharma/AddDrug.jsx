@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useForm } from "react-hook-form";
-import request from "../../../../axios";
+import { useQuery } from "react-query";
+import request from "../../../axios";
+import Select from "react-select";
 
 const AddDrug = ({ setAddModal, refetch }) => {
   const {
@@ -11,13 +13,18 @@ const AddDrug = ({ setAddModal, refetch }) => {
     formState: { errors },
   } = useForm();
 
+  const [selectedOption, setSelectedOption] = useState(null);
+  const { isLoading, error, data } = useQuery("repoDrugs", () =>
+    request.get("/drugs").then((res) => res.data)
+  );
+
   const submitForm = async (data) => {
     await request
-      .post("/drug", {
-        name: data.name,
-        brand: data.brand,
-        description: data.description,
-        strength: data.strength,
+      .post("/agency/drug", {
+        agency: { id: 1 },
+        drug: { id: selectedOption },
+        price: data.price,
+        stock: data.stock,
       })
       .then((res) => {
         refetch();
@@ -73,28 +80,39 @@ const AddDrug = ({ setAddModal, refetch }) => {
           className="flex flex-col items-start gap-y-2 mt-10 mb-5"
           onSubmit={handleSubmit(submitForm)}
         >
+          <Select
+            onChange={(e) => setSelectedOption(e.id)}
+            className="w-full"
+            styles={{
+              control: (base) => ({
+                ...base,
+                width: 285,
+              }),
+            }}
+            getOptionLabel={(option) =>
+              `${option.name} - ${option.brand} (${option.strength}g)`
+            }
+            getOptionValue={(option) => option.id}
+            options={data}
+          />
+          {/* <select className="inputField" {...register("drug")}>
+            {data.map(({ id, name, brand, strength }) => (
+              <option key={id} value={id}>
+                ds
+              </option>
+            ))}
+          </select> */}
           <input
-            {...register("name", { required: true })}
-            className={`inputField`}
-            type="text"
-            placeholder="Enter name"
+            {...register("stock", { required: true })}
+            className="inputField"
+            type="number"
+            placeholder="Enter stock"
           />
           <input
-            {...register("brand", { required: true })}
-            className={`inputField`}
-            type="text"
-            placeholder="Enter brand"
-          />
-          <textarea
-            {...register("description", { required: true })}
-            className={`inputField`}
-            placeholder="Enter description"
-          />
-          <input
-            {...register("strength", { required: true })}
-            className={`inputField`}
-            type="text"
-            placeholder="Enter strength"
+            {...register("price", { required: true })}
+            className="inputField"
+            type="number"
+            placeholder="Enter price"
           />
           <button type="submit" className="btnPrimaryLarge w-full mt-5">
             Add drug

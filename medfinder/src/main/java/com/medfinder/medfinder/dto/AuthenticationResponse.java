@@ -1,6 +1,6 @@
 package com.medfinder.medfinder.dto;
 
-import com.medfinder.medfinder.model.Role;
+import com.medfinder.medfinder.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

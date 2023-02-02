@@ -26,15 +26,13 @@ public class SecurityConfig {
                 .cors().configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
                     configuration.addAllowedMethod(HttpMethod.DELETE);
+                    configuration.addAllowedMethod(HttpMethod.PUT);
                     return configuration;
                 }).and()
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**").permitAll()
-//                .requestMatchers("/api/v1/agency/**").hasAnyAuthority("PHARMA", "ADMIN")
-                .requestMatchers("/api/v1/drugs/**").hasAnyAuthority("PHARMA", "ADMIN")
-                .requestMatchers("/api/v1/drug/**").hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

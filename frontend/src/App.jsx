@@ -12,7 +12,7 @@ const App = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
   const { user } = useAuth();
-  
+
   return (
     <div className="">
       <Header setLoginModal={setSignUpModal} />
@@ -50,9 +50,13 @@ const App = () => {
                 Notify drugs availability.
               </span>
             </div>
-            <Link to="/search">
-              <button className="btnPrimaryLarge w-1/2 mt-8">Browse for drugs</button>
-            </Link>
+            {user && (
+              <Link to="/search">
+                <button className="btnPrimaryLarge w-1/2 mt-8">
+                  Browse for drugs
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </main>

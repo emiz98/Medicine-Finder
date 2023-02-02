@@ -1,4 +1,4 @@
-package com.medfinder.medfinder.model;
+package com.medfinder.medfinder.entity;
 
 public enum Role {
 

@@ -1,4 +1,4 @@
-package com.medfinder.medfinder.config;
+package com.medfinder.medfinder.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

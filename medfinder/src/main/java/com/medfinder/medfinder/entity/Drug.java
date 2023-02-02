@@ -1,4 +1,4 @@
-package com.medfinder.medfinder.model;
+package com.medfinder.medfinder.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "drug")
+@Table(name = "drugs")
 public class Drug {
 
     @Id
