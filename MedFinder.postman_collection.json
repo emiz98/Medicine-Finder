@@ -1,0 +1,525 @@
+{
+	"info": {
+		"_postman_id": "f8146e80-fb2a-4162-a06f-f3bfa7509dc1",
+		"name": "MedFinder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19321252"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\":\"user\",\r\n    \"role\":\"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/authenticate",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTY3NTczNzE2NywiZXhwIjoxNjc1NzM4NjA3fQ.bEzZvlmqV4Tg2sCQmPgN4rOhyCZVGIX0lJq3ZPLuVfs\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/validate",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agency",
+			"item": [
+				{
+					"name": "Create Agency",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTY3NTM2MjE0MywiZXhwIjoxNjc1MzYzNTgzfQ.2v-e3uBi7nk0_NMcCUH2Dh_ftM6klRbcUjDQ_IYVKxU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Healthguard\",\r\n    \"address\": \"11/2\",\r\n    \"lat\": 10.510,\r\n    \"lon\": 5.221\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/agency",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"agency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\":\"Healthguards\",\r\n    \"lat\":12.2,\r\n    \"lon\":14.2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/agency/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"agency",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2NzUzNjIxMjUsImV4cCI6MTY3NTM2MzU2NX0.hth7Y1Qzzhriq3Ks_RRFr4stcKE1feQdE5NPLiVdIY0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/agency/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"agency",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/agency/delete/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"agency",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Drug",
+			"item": [
+				{
+					"name": "Create Drug",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"ff\",\r\n    \"brand\":\"fff\",\r\n    \"description\":\"ffff\",\r\n    \"strength\":\"asdasd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/drug/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"drug",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Drugs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/drug/all",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"drug",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drug by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/drug/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"drug",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Drug",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"sssss\",\r\n    \"brand\": \"sssddd\",\r\n    \"description\": \"sssssada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/drug/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"drug",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Drug",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/drug/delete/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"drug",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AgencyDrugs",
+			"item": [
+				{
+					"name": "Create Agency Drug",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agency\": {\"id\":1},\r\n    \"drug\": {\"id\":2},\r\n    \"price\":1000,\r\n    \"stock\":20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/drugs/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"drugs",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Agecy Drug",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/drugs/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"drugs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8080/api/v1"
+		},
+		{
+			"key": "ADMIN_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2NzUyNzUwMDAsImV4cCI6MTY3NTI3NjQ0MH0.fiR0vQBg4SMuSrhAp8ORBpO7pjMYaP2AISQy8Fj7BdI",
+			"type": "default"
+		},
+		{
+			"key": "PHARMA_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaGFybWFAZ21haWwuY29tIiwiaWF0IjoxNjc0NzI3NjI3LCJleHAiOjE2NzQ3MjkwNjd9.OLXc7IXjDfcRt2XKZ9h7zD3Wdap6GONY9cFtKRRhiPE",
+			"type": "default"
+		},
+		{
+			"key": "USER_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTY3NTM2MTc2MSwiZXhwIjoxNjc1MzYzMjAxfQ.TjIXYa-DAGslUYJ9IqPy3OPk6TDNfuNDFSigv_gdEsg",
+			"type": "default"
+		}
+	]
+}
